@@ -4,14 +4,8 @@ param devcenterName string = ''
 @description('The name of Network Connection')
 param networkConnectionName string = ''
 
-@description('The name of Dev Box networking resource group')
-param networkingResourceGroupName string = ''
-
 @description('The name of Dev Center project')
 param projectName string = ''
-
-@description('The name of user identity')
-param userIdentityName string = ''
 
 @description('The subnet resource id if the user wants to use existing subnet')
 param existingSubnetId string = ''
@@ -35,11 +29,10 @@ param principalId string = ''
 param principalType string = 'User'
 
 param location string = resourceGroup().location
+param resourceToken string = toLower(uniqueString(resourceGroup().id, location))
 param tags object = {}
 
-param resourceToken string = toLower(uniqueString(resourceGroup().id, location))
 var abbrs = loadJsonContent('./abbreviations.json')
-
 var ncName = !empty(networkConnectionName) ? networkConnectionName : '${abbrs.networkConnections}${resourceToken}'
 
 module vnet 'core/vnet.bicep' = if(empty(existingSubnetId)) {
@@ -63,8 +56,8 @@ module devcenter 'core/devcenter.bicep' = {
     subnetId: !empty(existingSubnetId) ? existingSubnetId : vnet.outputs.subnetId
     networkConnectionName: ncName
     projectName: !empty(projectName) ? projectName : '${abbrs.devcenterProject}${resourceToken}'
-    userIdentityName: !empty(userIdentityName) ? userIdentityName : '${abbrs.managedIdentityUserAssignedIdentities}${resourceToken}'
-    networkingResourceGroupName: !empty(networkingResourceGroupName) ? networkingResourceGroupName : '${abbrs.devcenterNetworkingResourceGroup}${ncName}-${location}'
+    userIdentityName: '${abbrs.managedIdentityUserAssignedIdentities}${resourceToken}'
+    networkingResourceGroupName: '${abbrs.devcenterNetworkingResourceGroup}${ncName}-${location}'
     principalId: principalId
     principalType: principalType
   }

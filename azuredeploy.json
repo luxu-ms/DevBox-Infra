@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.17.1.54307",
-      "templateHash": "11997086873224978893"
+      "templateHash": "4624482292993473784"
     }
   },
   "parameters": {
@@ -23,25 +23,11 @@
         "description": "The name of Network Connection"
       }
     },
-    "networkingResourceGroupName": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "The name of Dev Box networking resource group"
-      }
-    },
     "projectName": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "The name of Dev Center project"
-      }
-    },
-    "userIdentityName": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "The name of user identity"
       }
     },
     "existingSubnetId": {
@@ -97,13 +83,13 @@
       "type": "string",
       "defaultValue": "[resourceGroup().location]"
     },
-    "tags": {
-      "type": "object",
-      "defaultValue": {}
-    },
     "resourceToken": {
       "type": "string",
       "defaultValue": "[toLower(uniqueString(resourceGroup().id, parameters('location')))]"
+    },
+    "tags": {
+      "type": "object",
+      "defaultValue": {}
     }
   },
   "variables": {
@@ -386,8 +372,12 @@
             "value": "[variables('ncName')]"
           },
           "projectName": "[if(not(empty(parameters('projectName'))), createObject('value', parameters('projectName')), createObject('value', format('{0}{1}', variables('abbrs').devcenterProject, parameters('resourceToken'))))]",
-          "userIdentityName": "[if(not(empty(parameters('userIdentityName'))), createObject('value', parameters('userIdentityName')), createObject('value', format('{0}{1}', variables('abbrs').managedIdentityUserAssignedIdentities, parameters('resourceToken'))))]",
-          "networkingResourceGroupName": "[if(not(empty(parameters('networkingResourceGroupName'))), createObject('value', parameters('networkingResourceGroupName')), createObject('value', format('{0}{1}-{2}', variables('abbrs').devcenterNetworkingResourceGroup, variables('ncName'), parameters('location'))))]",
+          "userIdentityName": {
+            "value": "[format('{0}{1}', variables('abbrs').managedIdentityUserAssignedIdentities, parameters('resourceToken'))]"
+          },
+          "networkingResourceGroupName": {
+            "value": "[format('{0}{1}-{2}', variables('abbrs').devcenterNetworkingResourceGroup, variables('ncName'), parameters('location'))]"
+          },
           "principalId": {
             "value": "[parameters('principalId')]"
           },
