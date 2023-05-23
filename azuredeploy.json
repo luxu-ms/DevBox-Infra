@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.17.1.54307",
-      "templateHash": "4624482292993473784"
+      "templateHash": "5852965517053365640"
     }
   },
   "parameters": {
@@ -372,9 +372,6 @@
             "value": "[variables('ncName')]"
           },
           "projectName": "[if(not(empty(parameters('projectName'))), createObject('value', parameters('projectName')), createObject('value', format('{0}{1}', variables('abbrs').devcenterProject, parameters('resourceToken'))))]",
-          "userIdentityName": {
-            "value": "[format('{0}{1}', variables('abbrs').managedIdentityUserAssignedIdentities, parameters('resourceToken'))]"
-          },
           "networkingResourceGroupName": {
             "value": "[format('{0}{1}-{2}', variables('abbrs').devcenterNetworkingResourceGroup, variables('ncName'), parameters('location'))]"
           },
@@ -392,13 +389,10 @@
             "_generator": {
               "name": "bicep",
               "version": "0.17.1.54307",
-              "templateHash": "3663211259542415144"
+              "templateHash": "3014686800782954993"
             }
           },
           "parameters": {
-            "userIdentityName": {
-              "type": "string"
-            },
             "devcenterName": {
               "type": "string"
             },
@@ -503,27 +497,11 @@
               ]
             },
             {
-              "type": "Microsoft.ManagedIdentity/userAssignedIdentities",
-              "apiVersion": "2023-01-31",
-              "name": "[parameters('userIdentityName')]",
-              "location": "[parameters('location')]",
-              "tags": "[parameters('tags')]"
-            },
-            {
               "type": "Microsoft.DevCenter/devcenters",
               "apiVersion": "2023-01-01-preview",
               "name": "[parameters('devcenterName')]",
               "location": "[parameters('location')]",
-              "identity": {
-                "type": "UserAssigned",
-                "userAssignedIdentities": {
-                  "[format('{0}', resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('userIdentityName')))]": {}
-                }
-              },
-              "tags": "[parameters('tags')]",
-              "dependsOn": [
-                "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('userIdentityName'))]"
-              ]
+              "tags": "[parameters('tags')]"
             },
             {
               "type": "Microsoft.DevCenter/networkConnections",

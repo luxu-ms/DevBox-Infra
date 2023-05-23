@@ -1,4 +1,3 @@
-param userIdentityName string
 param devcenterName string
 param networkConnectionName string
 param networkingResourceGroupName string
@@ -36,21 +35,9 @@ var storage = {
   '1024gb': 'ssd_1024gb'
 }
 
-resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
-  name: userIdentityName
-  location: location
-  tags: tags
-}
-
 resource devcenter 'Microsoft.DevCenter/devcenters@2023-01-01-preview' = {
   name: devcenterName
   location: location
-  identity: {
-    type: 'UserAssigned'
-    userAssignedIdentities: {
-      '${managedIdentity.id}': {}
-    }
-  }
   tags: tags
 }
 

@@ -56,7 +56,6 @@ module devcenter 'core/devcenter.bicep' = {
     subnetId: !empty(existingSubnetId) ? existingSubnetId : vnet.outputs.subnetId
     networkConnectionName: ncName
     projectName: !empty(projectName) ? projectName : '${abbrs.devcenterProject}${resourceToken}'
-    userIdentityName: '${abbrs.managedIdentityUserAssignedIdentities}${resourceToken}'
     networkingResourceGroupName: '${abbrs.devcenterNetworkingResourceGroup}${ncName}-${location}'
     principalId: principalId
     principalType: principalType
