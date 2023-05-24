@@ -1,7 +1,7 @@
 {
     "definitions": [
         {
-            "name": "win11-vs2022",
+            "name": "win11-vs2022-vscode",
             "image": "win11-ent-vs2022",
             "compute": "8-vcpu-32gb-mem",
             "storage": "512gb"
@@ -22,7 +22,7 @@
     "pools": [
         {
             "name": "win11-vs2022-pool",
-            "definition": "win11-vs2022",
+            "definition": "win11-vs2022-vscode",
             "administrator": "Enabled"
         }
     ]
