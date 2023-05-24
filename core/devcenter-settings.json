@@ -21,7 +21,7 @@
     ],
     "pools": [
         {
-            "name": "win11-vs2022-pool",
+            "name": "win11-vs2022-vscode-pool",
             "definition": "win11-vs2022-vscode",
             "administrator": "Enabled"
         }
