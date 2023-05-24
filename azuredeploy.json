@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.17.1.54307",
-      "templateHash": "5852965517053365640"
+      "templateHash": "15541870016871275779"
     }
   },
   "parameters": {
@@ -82,10 +82,6 @@
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]"
-    },
-    "resourceToken": {
-      "type": "string",
-      "defaultValue": "[toLower(uniqueString(resourceGroup().id, parameters('location')))]"
     },
     "tags": {
       "type": "object",
@@ -232,7 +228,8 @@
       "devcenterNetworkingResourceGroup": "ni-"
     },
     "abbrs": "[variables('$fxv#0')]",
-    "ncName": "[if(not(empty(parameters('networkConnectionName'))), parameters('networkConnectionName'), format('{0}{1}', variables('abbrs').networkConnections, parameters('resourceToken')))]"
+    "resourceToken": "[toLower(uniqueString(resourceGroup().id, parameters('location')))]",
+    "ncName": "[if(not(empty(parameters('networkConnectionName'))), parameters('networkConnectionName'), format('{0}{1}', variables('abbrs').networkConnections, variables('resourceToken')))]"
   },
   "resources": [
     {
@@ -255,11 +252,11 @@
           "vnetAddressPrefixes": {
             "value": "[parameters('vnetAddressPrefixes')]"
           },
-          "vnetName": "[if(not(empty(parameters('vnetName'))), createObject('value', parameters('vnetName')), createObject('value', format('{0}{1}', variables('abbrs').networkVirtualNetworks, parameters('resourceToken'))))]",
+          "vnetName": "[if(not(empty(parameters('vnetName'))), createObject('value', parameters('vnetName')), createObject('value', format('{0}{1}', variables('abbrs').networkVirtualNetworks, variables('resourceToken'))))]",
           "subnetAddressPrefixes": {
             "value": "[parameters('subnetAddressPrefixes')]"
           },
-          "subnetName": "[if(not(empty(parameters('subnetName'))), createObject('value', parameters('subnetName')), createObject('value', format('{0}{1}', variables('abbrs').networkVirtualNetworksSubnets, parameters('resourceToken'))))]"
+          "subnetName": "[if(not(empty(parameters('subnetName'))), createObject('value', parameters('subnetName')), createObject('value', format('{0}{1}', variables('abbrs').networkVirtualNetworksSubnets, variables('resourceToken'))))]"
         },
         "template": {
           "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
@@ -366,12 +363,12 @@
           "tags": {
             "value": "[parameters('tags')]"
           },
-          "devcenterName": "[if(not(empty(parameters('devcenterName'))), createObject('value', parameters('devcenterName')), createObject('value', format('{0}{1}', variables('abbrs').devcenter, parameters('resourceToken'))))]",
+          "devcenterName": "[if(not(empty(parameters('devcenterName'))), createObject('value', parameters('devcenterName')), createObject('value', format('{0}{1}', variables('abbrs').devcenter, variables('resourceToken'))))]",
           "subnetId": "[if(not(empty(parameters('existingSubnetId'))), createObject('value', parameters('existingSubnetId')), createObject('value', reference(resourceId('Microsoft.Resources/deployments', 'vnet'), '2022-09-01').outputs.subnetId.value))]",
           "networkConnectionName": {
             "value": "[variables('ncName')]"
           },
-          "projectName": "[if(not(empty(parameters('projectName'))), createObject('value', parameters('projectName')), createObject('value', format('{0}{1}', variables('abbrs').devcenterProject, parameters('resourceToken'))))]",
+          "projectName": "[if(not(empty(parameters('projectName'))), createObject('value', parameters('projectName')), createObject('value', format('{0}{1}', variables('abbrs').devcenterProject, variables('resourceToken'))))]",
           "networkingResourceGroupName": {
             "value": "[format('{0}{1}-{2}', variables('abbrs').devcenterNetworkingResourceGroup, variables('ncName'), parameters('location'))]"
           },
@@ -389,7 +386,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.17.1.54307",
-              "templateHash": "3014686800782954993"
+              "templateHash": "4837853547753977331"
             }
           },
           "parameters": {
@@ -433,7 +430,7 @@
             "$fxv#0": {
               "definitions": [
                 {
-                  "name": "win11-vs2022",
+                  "name": "win11-vs2022-vscode",
                   "image": "win11-ent-vs2022",
                   "compute": "8-vcpu-32gb-mem",
                   "storage": "512gb"
@@ -453,8 +450,8 @@
               ],
               "pools": [
                 {
-                  "name": "win11-vs2022-pool",
-                  "definition": "win11-vs2022",
+                  "name": "win11-vs2022-vscode-pool",
+                  "definition": "win11-vs2022-vscode",
                   "administrator": "Enabled"
                 }
               ]
