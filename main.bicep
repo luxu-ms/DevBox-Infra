@@ -29,10 +29,10 @@ param principalId string = ''
 param principalType string = 'User'
 
 param location string = resourceGroup().location
-param resourceToken string = toLower(uniqueString(resourceGroup().id, location))
 param tags object = {}
 
 var abbrs = loadJsonContent('./abbreviations.json')
+var resourceToken = toLower(uniqueString(resourceGroup().id, location))
 var ncName = !empty(networkConnectionName) ? networkConnectionName : '${abbrs.networkConnections}${resourceToken}'
 
 module vnet 'core/vnet.bicep' = if(empty(existingSubnetId)) {
