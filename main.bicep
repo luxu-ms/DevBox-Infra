@@ -1,17 +1,19 @@
 @description('The name of Dev Center')
-param devcenterName string = ''
+param devcenterName string = 'dc-devbox-test'
 
 @description('The name of Network Connection')
-param networkConnectionName string = ''
+param networkConnectionName string = 'con-devbox-test'
 
 @description('The name of Dev Center project')
-param projectName string = ''
+param projectName string = 'dcprj-devbox-test'
 
 @description('The subnet resource id if the user wants to use existing subnet')
 param existingSubnetId string = ''
 
+param location string = resourceGroup().location
+
 @description('The name of the Virtual Network')
-param vnetName string = ''
+param vnetName string = 'vnet-${projectName}-${location}'
 
 @description('the subnet name of Dev Box')
 param subnetName string = 'default'
@@ -28,7 +30,6 @@ param principalId string = ''
 @description('The type of principal id: User, Group or ServicePrincipal')
 param principalType string = 'User'
 
-param location string = resourceGroup().location
 param tags object = {}
 
 var abbrs = loadJsonContent('./abbreviations.json')

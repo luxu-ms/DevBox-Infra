@@ -5,27 +5,27 @@
     "_generator": {
       "name": "bicep",
       "version": "0.17.1.54307",
-      "templateHash": "15652713952511057071"
+      "templateHash": "15804857229595756667"
     }
   },
   "parameters": {
     "devcenterName": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "dc-devbox-test",
       "metadata": {
         "description": "The name of Dev Center"
       }
     },
     "networkConnectionName": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "con-devbox-test",
       "metadata": {
         "description": "The name of Network Connection"
       }
     },
     "projectName": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "dcprj-devbox-test",
       "metadata": {
         "description": "The name of Dev Center project"
       }
@@ -37,9 +37,13 @@
         "description": "The subnet resource id if the user wants to use existing subnet"
       }
     },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
     "vnetName": {
       "type": "string",
-      "defaultValue": "",
+      "defaultValue": "[format('vnet-{0}-{1}', parameters('projectName'), parameters('location'))]",
       "metadata": {
         "description": "The name of the Virtual Network"
       }
@@ -78,10 +82,6 @@
       "metadata": {
         "description": "The type of principal id: User, Group or ServicePrincipal"
       }
-    },
-    "location": {
-      "type": "string",
-      "defaultValue": "[resourceGroup().location]"
     },
     "tags": {
       "type": "object",
