@@ -1,10 +1,10 @@
-@description('The name of Dev Center')
+@description('The name of Dev Center e.g. dc-devbox-test')
 param devcenterName string = 'dc-devbox-test'
 
-@description('The name of Network Connection')
+@description('The name of Network Connection e.g. con-devbox-test')
 param networkConnectionName string = 'con-devbox-test'
 
-@description('The name of Dev Center project')
+@description('The name of Dev Center project e.g. dcprj-devbox-test')
 param projectName string = 'dcprj-devbox-test'
 
 @description('The subnet resource id if the user wants to use existing subnet')
@@ -12,19 +12,19 @@ param existingSubnetId string = ''
 
 param location string = resourceGroup().location
 
-@description('The name of the Virtual Network')
+@description('The name of the Virtual Network e.g. vnet-dcprj-devbox-test-eastus')
 param vnetName string = 'vnet-${projectName}-${location}'
 
-@description('the subnet name of Dev Box')
+@description('the subnet name of Dev Box e.g. default')
 param subnetName string = 'default'
 
-@description('The vnet address prefixes of Dev Box')
+@description('The vnet address prefixes of Dev Box e.g. 10.4.0.0/16')
 param vnetAddressPrefixes string = '10.4.0.0/16'
 
-@description('The subnet address prefixes of Dev Box')
+@description('The subnet address prefixes of Dev Box e.g. 10.4.0.0/24')
 param subnetAddressPrefixes string = '10.4.0.0/24'
 
-@description('The user or group id that will be granted to Devcenter Dev Box User role ')
+@description('The user or group id that will be granted to Devcenter Dev Box User role')
 param principalId string = ''
 
 @description('The type of principal id: User, Group or ServicePrincipal')

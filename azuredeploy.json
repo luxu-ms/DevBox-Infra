@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.17.1.54307",
-      "templateHash": "15804857229595756667"
+      "templateHash": "8752916246619001828"
     }
   },
   "parameters": {
@@ -13,21 +13,21 @@
       "type": "string",
       "defaultValue": "dc-devbox-test",
       "metadata": {
-        "description": "The name of Dev Center"
+        "description": "The name of Dev Center e.g. dc-devbox-test"
       }
     },
     "networkConnectionName": {
       "type": "string",
       "defaultValue": "con-devbox-test",
       "metadata": {
-        "description": "The name of Network Connection"
+        "description": "The name of Network Connection e.g. con-devbox-test"
       }
     },
     "projectName": {
       "type": "string",
       "defaultValue": "dcprj-devbox-test",
       "metadata": {
-        "description": "The name of Dev Center project"
+        "description": "The name of Dev Center project e.g. dcprj-devbox-test"
       }
     },
     "existingSubnetId": {
@@ -45,35 +45,35 @@
       "type": "string",
       "defaultValue": "[format('vnet-{0}-{1}', parameters('projectName'), parameters('location'))]",
       "metadata": {
-        "description": "The name of the Virtual Network"
+        "description": "The name of the Virtual Network e.g. vnet-dcprj-devbox-test-eastus"
       }
     },
     "subnetName": {
       "type": "string",
       "defaultValue": "default",
       "metadata": {
-        "description": "the subnet name of Dev Box"
+        "description": "the subnet name of Dev Box e.g. default"
       }
     },
     "vnetAddressPrefixes": {
       "type": "string",
       "defaultValue": "10.4.0.0/16",
       "metadata": {
-        "description": "The vnet address prefixes of Dev Box"
+        "description": "The vnet address prefixes of Dev Box e.g. 10.4.0.0/16"
       }
     },
     "subnetAddressPrefixes": {
       "type": "string",
       "defaultValue": "10.4.0.0/24",
       "metadata": {
-        "description": "The subnet address prefixes of Dev Box"
+        "description": "The subnet address prefixes of Dev Box e.g. 10.4.0.0/24"
       }
     },
     "principalId": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
-        "description": "The user or group id that will be granted to Devcenter Dev Box User role "
+        "description": "The user or group id that will be granted to Devcenter Dev Box User role"
       }
     },
     "principalType": {
