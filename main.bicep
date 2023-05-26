@@ -10,6 +10,7 @@ param projectName string = 'dcprj-devbox-test'
 @description('The subnet resource id if the user wants to use existing subnet')
 param existingSubnetId string = ''
 
+@description('Primary location for all resources e.g. eastus')
 param location string = resourceGroup().location
 
 @description('The name of the Virtual Network e.g. vnet-dcprj-devbox-test-eastus')
