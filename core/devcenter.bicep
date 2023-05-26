@@ -111,6 +111,8 @@ resource role 'Microsoft.Authorization/roleAssignments@2022-04-01' = if(!empty(p
   }
 }
 
+output devcenterName string = devcenter.name
+
 output definitions array = [for (definition, i) in devceterSettings.definitions: {
   name: devboxDefinitions[i].name
 }]

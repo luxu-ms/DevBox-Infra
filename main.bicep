@@ -65,7 +65,7 @@ module devcenter 'core/devcenter.bicep' = {
 output vnetName string = empty(existingSubnetId) ? vnet.outputs.vnetName : ''
 output subnetName string = empty(existingSubnetId) ? vnet.outputs.subnetName : ''
 
-output devcetnerName string = devcenter.name
+output devcetnerName string = devcenter.outputs.devcenterName
 output projectName string = devcenter.outputs.projectName
 output networkConnectionName string = devcenter.outputs.networkConnectionName
 output definitions array = devcenter.outputs.definitions
