@@ -5,7 +5,6 @@ param subnetId string
 param projectName string
 param principalId string
 param location string = resourceGroup().location
-param tags object = {}
 
 @allowed([
   'Group'
@@ -38,7 +37,6 @@ var storage = {
 resource devcenter 'Microsoft.DevCenter/devcenters@2023-01-01-preview' = {
   name: devcenterName
   location: location
-  tags: tags
 }
 
 resource networkConnection 'Microsoft.DevCenter/networkConnections@2023-01-01-preview' = {
@@ -49,7 +47,6 @@ resource networkConnection 'Microsoft.DevCenter/networkConnections@2023-01-01-pr
     subnetId: subnetId
     networkingResourceGroupName: networkingResourceGroupName
   }
-  tags: tags
 }
 
 resource attachedNetworks 'Microsoft.DevCenter/devcenters/attachednetworks@2023-01-01-preview' = {
@@ -98,7 +95,6 @@ resource project 'Microsoft.DevCenter/projects@2022-11-11-preview' = {
   dependsOn: [
     devboxDefinitions
   ]
-  tags: tags
 }
 
 resource role 'Microsoft.Authorization/roleAssignments@2022-04-01' = if(!empty(principalId)) {
